@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LucideAngularModule ,CircleX} from 'lucide-angular';
 @Component({
   selector: 'app-modal',
@@ -7,6 +7,13 @@ import { LucideAngularModule ,CircleX} from 'lucide-angular';
   styleUrl: './modal.component.scss'
 })
 export class ModalComponent {
-  readonly close = CircleX;
-  headerText: string = 'Sample Header Text'
+  readonly x = CircleX;
+  @Input() Title: string = "Header";
+  @Input() isVisible: boolean = false;
+  @Output() closeModal = new EventEmitter<void>();
+
+
+  close(){
+    this.closeModal.emit();
+  }
 }

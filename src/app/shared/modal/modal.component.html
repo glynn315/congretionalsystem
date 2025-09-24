@@ -1,9 +1,11 @@
-<div class="absolute top-0 left-0 bg-purple-200/50 w-full h-dvh flex flex-col items-center justify-center">
-    <div class="w-2/6 bg-white shadow-md p-3 rounded-xl">
-        <div class="border-b-2 pb-2 border-gray-300 flex flex-row justify-between items-center">
-            <header class="font-semibold text-xl">{{headerText}}</header>
-            <lucide-icon [img]="close" class="cursor-pointer"></lucide-icon>
+@if (isVisible) {
+    <div class="absolute top-0 left-0 bg-gray-900/50 w-full h-dvh flex flex-col items-center justify-center">
+        <div class="w-3/6 bg-white shadow-md p-3 rounded-xl">
+            <div class="border-b-2 pb-2 border-gray-300 flex flex-row justify-between items-center">
+                <header class="font-semibold text-xl">{{Title}}</header>
+                <lucide-icon [img]="x" class="cursor-pointer" (click)="close()"></lucide-icon>
+            </div>
+            <ng-content></ng-content>
         </div>
-        <ng-content></ng-content>
     </div>
-</div>
+}
