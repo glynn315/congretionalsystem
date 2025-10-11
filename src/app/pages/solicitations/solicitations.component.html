@@ -9,20 +9,16 @@
 
 <app-modal [Title]="TitleHeader" [isVisible]="isVisible" (closeModal)="closeModal()">
     <header class="text-xl mt-2 font-bold">Solicitation Information</header>
-    <form action="">
+    <form (ngSubmit)="SubmitSolicitation()">
         <div class="flex flex-row gap-3">
             <div class="mt-2 w-4/6">
                 <label for="">Name of Solicitor</label>
-                <input type="text" name="" id="" class="w-full p-2 border rounded-md">
-            </div>
-            <div class="mt-2 w-2/6">
-                <label for="">Date Solicited</label>
-                <input type="date" name="" id="" class="w-full p-2 border rounded-md">
+                <input type="text" name="name_solicitor" [(ngModel)]="SolicitationFields.name_solicitor" id="" class="w-full p-2 border rounded-md">
             </div>
         </div>
         <div class="mt-1">
             <div>Purpose of Solicitation</div>
-            <textarea name="" id="" class="p-2 border rounded-md w-full">
+            <textarea name="purpose" id="" [(ngModel)]="SolicitationFields.purpose" class="p-2 border rounded-md w-full">
             </textarea>
         </div>
         <button class="w-full p-2 rounded-full bg-[#48A6A7] text-white mt-3">
