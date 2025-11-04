@@ -1,14 +1,31 @@
 <div class="navigation h-dvh p-3 w-full">
-    
-    <ul class="h-full rounded-xl overflow-hidden bg-[#48A6A7] shadow-md text-black font-semibold">
+    <ul class="h-full rounded-xl overflow-hidden bg-[#F57600] shadow-md text-white font-semibold">
         <div class="p-3 text-[#006A71]">
-            <header class="font-bold text-3xl">Congressional System</header>
+            <p class="text-xl mt-1 text-white">{{ user?.firstname }} {{ user?.lastname }}</p>
+            <p class="text-xs italic text-white">{{ user?.role }}</p>
         </div>
-        <li routerLink="/home">Dashboard</li>
-        <li routerLink="/accounts">Accounts</li>
-        <li routerLink="/fundings">Fundings</li>
-        <li routerLink="/encoding">Encoding</li>
-        <li routerLink="/solicitations">Solicitations</li>
-        <li routerLink="/invitations">Invitations</li>
+
+        <ng-container *ngIf="user?.role === 'Admin'">
+            <li routerLink="/home" routerLinkActive="active">Dashboard</li>
+            <li routerLink="/accounts" routerLinkActive="active">Accounts</li>
+            <li routerLink="/fundings" routerLinkActive="active">Fundings</li>
+            <li routerLink="/encoding" routerLinkActive="active">Encoding</li>
+            <li routerLink="/solicitations" routerLinkActive="active">Solicitations</li>
+            <li routerLink="/invitations" routerLinkActive="active">Invitations</li>
+            <li routerLink="/masterlist" routerLinkActive="active">Masterlist</li>
+        </ng-container>
+
+        <ng-container *ngIf="user?.role === 'Social Worker'">
+            <li routerLink="/home" routerLinkActive="active">Dashboard</li>
+            <li routerLink="/encoding" routerLinkActive="active">Encoding</li>
+        </ng-container>
+
+        <ng-container *ngIf="user?.role === 'Encoder'">
+            <li routerLink="/home" routerLinkActive="active">Dashboard</li>
+            <li routerLink="/solicitations" routerLinkActive="active">Solicitations</li>
+            <li routerLink="/invitations" routerLinkActive="active">Invitations</li>
+        </ng-container>
+
+        <li class="mt-auto cursor-pointer hover:bg-[#006A71] p-3 text-left" (click)="logout()">Logout</li>
     </ul>
 </div>

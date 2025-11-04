@@ -1,3 +1,87 @@
-<div class="py-2">
-This is Dashboard
+<div class="py-4 px-4">
+  <div class="text-2xl font-semibold mb-6">
+    Welcome, {{ user?.firstname }} {{ user?.lastname }}!
+  </div>
+  <div *ngIf="user?.role === 'Admin'">
+    <h2 class="text-2xl font-bold text-blue-600">Admin Overview</h2>
+    <div class="flex flex-col h-auto overflow-auto">
+      <div class="flex flex-row gap-3 items-center p-3 ">
+        <div *ngFor="let f of dashboardData.fundings" class="w-full shadow shadow-gray-400 p-4 rounded-xl flex flex-col">
+          <header class="font-bold text-3xl">{{ f.funding_information }}</header>
+          <span class="w-full block text-right font-semibold text-xl">₱{{ f.total_remaining_budget | number }}</span>
+        </div>
+      </div>
+      <div class="flex flex-row justify-between gap-3">
+        <div class="w-2/3 flex flex-row gap-3">
+          <div class="flex flex-col w-full">
+            <header class="text-xl font-semibold">Assistance Monitoring</header>
+            <div class="flex flex-col gap-2">
+              <div *ngFor="let s of dashboardData.socialWorkerAssist" class="w-full border rounded p-4 flex flex-row justify-between">
+                <span>{{ s.firstname }} {{ s.lastname }}</span> Assisted {{ s.assisted_today }} today
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="w-1/3 flex flex-col gap-3">
+          <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow">
+            <h3 class="text-lg font-medium mb-2">📊 Daily Solicitations</h3>
+            <p class="text-3xl font-bold">{{ dashboardData.totalSolicitationsToday }}</p>
+          </div>
+
+          <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow">
+            <h3 class="text-lg font-medium mb-2">📅 Upcoming Invitations</h3>
+            <p class="text-3xl font-bold">{{ dashboardData.upcomingInvitations }}</p>
+          </div>
+          <div class="w-full">
+            <header class="text-xl font-semibold">Released Funds</header>
+            <div class="flex flex-col gap-2 py-2 px-1">
+              <div *ngFor="let f of dashboardData.fundsReleased" class="w-full shadow rounded-xl p-4 flex flex-row justify-between">
+                {{ f.funding_information }} <span>₱{{ f.total_released | number }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Social Worker Dashboard -->
+  <div *ngIf="user?.role === 'Social Worker'" class="space-y-4">
+    <h2 class="text-2xl font-bold text-purple-600 mb-4">Social Worker Dashboard</h2>
+    <div class="flex flex-row gap-3 items-center p-3 ">
+      <div *ngFor="let f of dashboardData.fundings" class="w-full shadow shadow-gray-400 p-4 rounded-xl flex flex-col">
+        <header class="font-bold text-3xl">{{ f.funding_information }}</header>
+        <span class="w-full block text-right font-semibold text-xl">₱{{ f.total_remaining_budget | number }}</span>
+      </div>
+    </div>
+    <div class="flex flex-row gap-3 items-center p-3 ">
+      <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow w-full">
+        <p class="font-medium">🏦 Total Fundings</p>
+        <p class="text-2xl font-bold">{{ dashboardData.totalFundings }}</p>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow w-full">
+        <p class="font-medium">💰 Funds Released</p>
+        <p class="text-2xl font-bold">₱{{ dashboardData.fundsReleased | number }}</p>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow w-full">
+        <p class="font-medium">🤝 Assistance Today</p>
+        <p class="text-2xl font-bold">{{ dashboardData.totalAssistance }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Encoder Dashboard -->
+  <div *ngIf="user?.role === 'Encoder'" class="space-y-4">
+    <h2 class="text-2xl font-bold text-orange-600 mb-4">Encoder Dashboard</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow">
+        <p class="font-medium">📝 Solicitations Today</p>
+        <p class="text-2xl font-bold">{{ dashboardData.solicitationCountToday }}</p>
+      </div>
+      <div class="p-6 bg-white rounded-xl shadow hover:shadow-lg transition-shadow">
+        <p class="font-medium">📅 Active Invitations</p>
+        <p class="text-2xl font-bold">{{ dashboardData.validInvitations }}</p>
+      </div>
+    </div>
+  </div>
 </div>

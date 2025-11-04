@@ -16,4 +16,9 @@ export class FundingsService {
   displayFundings(): Observable<Fundings[]>{
     return this.http.get<Fundings[]>(`${this.apiUrl}/displayFundings`)
   }
+
+
+  displayPettyFundings(): Observable<Fundings>{
+    return this.http.get<Fundings>(`${this.apiUrl}/displayPettyCashFunding`)
+  }
 }

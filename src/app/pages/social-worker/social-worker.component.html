@@ -18,14 +18,10 @@
     <header class="mt-2 font-bold text-2xl">Reuqest Information</header>
     <form (ngSubmit)="submitRequest()">
         <div class="flex flex-row gap-2">
-            <div class="mt-1 w-4/6">
+            <div class="mt-1 w-full">
                 <label for="">Control Number</label>
-                <input type="text" name="control_number" [(ngModel)]="RequestForms.control_number" id="" class="p-2 border rounded-md w-full">
+                <input type="text" name="control_number" [(ngModel)]="RequestForms.control_number" id="" class="p-2 border rounded-md w-full" readonly>
             </div>
-            <!-- <div class="mt-1 w-2/6">
-                <label for="">Date</label>
-                <input type="date" name="" [(ngModel)]="RequestForms.control_number" id="" class="p-2 border rounded-md w-full">
-            </div> -->
         </div>
         <div class="mt-2">
             <label for="">Patient's Name</label>
@@ -44,16 +40,16 @@
             <input type="text" name="contact_number" [(ngModel)]="RequestForms.contact_number" id="" class="p-2 border rounded-md w-full">
         </div>
         <div class="flex flex-row gap-2">
-            <div class="mt-2 w-5/6">
+            <!-- <div class="mt-2 w-5/6">
                 <label for="">Assistance Provided</label>
                 <input type="text" name="provider_id" [(ngModel)]="RequestForms.provider_id" id="" class="p-2 border rounded-md w-full">
-            </div>
-            <div class="mt-2 w-1/6">
+            </div> -->
+            <div class="mt-2 w-full">
                 <label for="">Amount</label>
                 <input type="text" name="amount" [(ngModel)]="RequestForms.amount" id="" class="p-2 border rounded-md w-full">
             </div>
         </div>
-        <button class="w-full p-2 rounded-full bg-[#48A6A7] mt-3 text-white text-lg">
+        <button class="w-full p-2 rounded-full bg-[#F57600] mt-3 text-white text-lg">
             Save Changes
         </button>
     </form>

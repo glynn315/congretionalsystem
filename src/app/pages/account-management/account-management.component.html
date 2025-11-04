@@ -1,3 +1,75 @@
-<div class="py-2">
-    This is where to manage accounts
+<div class="py-4">
+    <div class="w-full flex flex-row justify-between items-center bg-[#F57600] py-2 px-4 text-white rounded-xl">
+        <header class="text-lg font-semibold">Account</header>
+        <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openModal()">
+            <lucide-icon [img]="plus"></lucide-icon>
+            New Account
+        </button>
+    </div>
+    <div class="flex flex-col gap-4 mt-4">
+        <table class="text-left">
+            <thead>
+                <th class="w-[10%]">#</th>
+                <th class="w-[30%]">Name</th>
+                <th class="w-[40%]">Address</th>
+                <th class="w-[10%]">Role</th>
+                <th class="w-[10%]">Actions</th>
+            </thead>
+            <tr *ngFor="let user of Accounts">
+                <td>{{user.account_id}}</td>
+                <td>{{user.firstname}} {{user.middlename}} {{user.lastname}}</td>
+                <td>{{user.province}} {{user.municipality}} {{user.barangay}}</td>
+                <td>{{user.role}}</td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
 </div>
+
+<app-modal [Title]="TitleHeader" [isVisible]="isVisible" (closeModal)="closeModal()">
+    <form (ngSubmit)="submitInformation()">
+        <div class="flex flex-col gap-2 w-full">
+            <label for="" class="font-semibold text-xl mt-2">Name</label>
+            <div class="w-full">
+                <input type="text" name="firstname" [(ngModel)]="AccountFields.firstname" id="" class="w-full p-2 border rounded-md" placeholder="First Name">
+            </div>
+            <div class="mt-2 w-full">
+                <input type="text" name="middlename" [(ngModel)]="AccountFields.middlename" id="" class="w-full p-2 border rounded-md" placeholder="Middle Name">
+            </div>
+            <div class="mt-2 w-full">
+                <input type="text" name="lastname" [(ngModel)]="AccountFields.lastname" id="" class="w-full p-2 border rounded-md" placeholder="Last Name">
+            </div>
+        </div>
+        <div class="flex flex-col gap-2 w-full">
+            <label for="" class="font-semibold text-xl mt-2">Address</label>
+            <div class="w-full">
+                <input type="text" name="province" [(ngModel)]="AccountFields.province" id="" class="w-full p-2 border rounded-md" placeholder="Province">
+            </div>
+            <div class="mt-2 w-full">
+                <input type="text" name="municipality" [(ngModel)]="AccountFields.municipality" id="" class="w-full p-2 border rounded-md" placeholder="Municipality">
+            </div>
+            <div class="mt-2 w-full">
+                <input type="text" name="barangay" [(ngModel)]="AccountFields.barangay" id="" class="w-full p-2 border rounded-md" placeholder="Barangay">
+            </div>
+        </div>
+        <div class="flex flex-col gap-2 w-full">
+            <label for="" class="font-semibold text-xl mt-2">Account</label>
+            <div class="mt-2 w-full">
+                <input type="text" name="username" [(ngModel)]="AccountFields.username" id="" class="w-full p-2 border rounded-md" placeholder="Username">
+            </div>
+            <div class="mt-2 w-full">
+                <input type="password" name="password" [(ngModel)]="AccountFields.password" id="" class="w-full p-2 border rounded-md" placeholder="Password">
+            </div>
+            <div class="mt-2 w-full">
+                <select name="role" [(ngModel)]="AccountFields.role" id="" class="w-full p-2 border rounded-md">
+                    <option value="Admin">Admin</option>
+                    <option value="Social Worker">Social Worker</option>
+                    <option value="Encoder">Encoder</option>
+                </select>
+            </div>
+        </div>
+        <button class="w-full p-2 rounded-full bg-[#F57600] text-white mt-3">
+            Save Changes
+        </button>
+    </form>
+</app-modal>

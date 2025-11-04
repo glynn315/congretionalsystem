@@ -6,17 +6,26 @@ import { LayoutComponent } from './layout/layout/layout.component';
 import { FundingsComponent } from './pages/fundings/fundings.component';
 import { InvitationsComponent } from './pages/invitations/invitations.component';
 import { SolicitationsComponent } from './pages/solicitations/solicitations.component';
+import { LoginComponent } from './auth/Login/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
+import { MasterlistComponent } from './pages/masterlist/masterlist.component';
 
 export const routes: Routes = [
-    {path:'', component:LayoutComponent,
-        children:[
-            {path:'home', component:DashboardComponent},
-            {path:'encoding', component:SocialWorkerComponent},
-            {path:'accounts', component:AccountManagementComponent},
-            {path:'fundings', component:FundingsComponent},
-            {path:'invitations', component:InvitationsComponent},
-            {path:'solicitations', component:SolicitationsComponent},
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
+    {
+    path: '',
+    component: LayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+        { path: 'home', component: DashboardComponent },
+        { path: 'encoding', component: SocialWorkerComponent },
+        { path: 'accounts', component: AccountManagementComponent },
+        { path: 'fundings', component: FundingsComponent },
+        { path: 'invitations', component: InvitationsComponent },
+        { path: 'solicitations', component: SolicitationsComponent },
+        { path: 'masterlist', component: MasterlistComponent },
         ]
     },
-    
 ];

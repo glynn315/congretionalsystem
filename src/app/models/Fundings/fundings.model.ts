@@ -1,4 +1,4 @@
 export interface Fundings {
-    funding_information: string,
+    funding_information?: string,
     id?: number,
 }

@@ -22,6 +22,9 @@ export class FundingsComponent implements OnInit {
   TitleHeader: string = 'Update Fundings'
   FundingID: number = 0;
   fundingsInformation : Fundings[] = [];
+  pettyCashFunding : Fundings = {
+    
+  };
   budgetField: Budget ={
     fundings_id: 0,
     amount: 0,
@@ -34,6 +37,7 @@ export class FundingsComponent implements OnInit {
   ngOnInit(): void {
     this.displayFunding();
     this.displayBudgets();
+    this.displayPettyBudgets();
   }
 
   displayBudgets(){
@@ -42,9 +46,15 @@ export class FundingsComponent implements OnInit {
     })
   }
 
+  displayPettyBudgets(){
+    this.FundingsServices.displayPettyFundings().subscribe((data) => {
+      this.pettyCashFunding = data;
+    })
+  }
+
   getBudgetByFundingId(fundingId: number): number {
     const budget = this.TotalBudget?.find((b: any) => b.fundings_id === fundingId);
-    return budget ? budget.total_budgets : 0;
+    return budget ? budget.total_remaining_budget : 0;
   }
 
   displayFunding(){
