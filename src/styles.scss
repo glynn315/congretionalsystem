@@ -2,3 +2,22 @@
 button{
     cursor: pointer;
 }
+
+table{
+    width: 100%;
+    thead{
+        th{
+            padding:15px 0px !important;
+            text-align: left;
+        }
+    }
+    tr{
+        td{
+            padding: 10px 5px !important;
+        }
+        &:hover{
+            background: #dbdbdb;
+            transition: .5s;
+        }
+    }
+}

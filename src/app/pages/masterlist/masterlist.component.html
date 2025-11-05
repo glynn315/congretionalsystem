@@ -1,7 +1,53 @@
-<div>
-    @for (request of RequestForm; track $index) {
-        <div>
-            {{request.patients_name}}
+<div class="py-4">
+    <div class="w-full flex flex-row justify-between items-center bg-[#F57600] py-2 px-4 text-white rounded-xl">
+        <header class="text-lg font-semibold">Master List</header>
+        <div class="flex flex-row gap-2">
+            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full">
+                <lucide-icon [img]="plus"></lucide-icon>
+                Master List
+            </button>
+            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openAreaModal()">
+                <lucide-icon [img]="mapPlus"></lucide-icon>
+                Area
+            </button>
         </div>
-    }
+    </div>
+    <table class="!w-full">
+        <thead>
+            <th>Control No.</th>
+            <th>Name of Requestor</th>
+            <th>Representative Name</th>
+            <th>Address</th>
+            <th>Contact Number</th>
+            <th>Amount</th>
+        </thead>
+        
+            @for (request of RequestForm; track $index) {
+                <tr>
+                    <td>{{request.control_number}}</td>
+                    <td>{{request.patients_name}}</td>
+                    <td>{{request.representative_name}}</td>
+                    <td>{{request.address}}</td>
+                    <td>{{request.contact_number}}</td>
+                    <td>{{request.amount}}</td>
+                </tr>       
+            }
+    </table>
 </div>
+<app-modal [Title]="headerTitle" [isVisible]="AreaModal" (closeModal)="closeModal()">
+    <header class="mt-2 font-bold text-2xl">Area</header>
+    <form (ngSubmit)="submitArea()">
+        <input type="text" name="areaInformation" [(ngModel)]="areaFields.areaInformation" class="w-full border border-gray-400 rounded-md p-2 outline-none mt-2" placeholder="Area Name">
+
+        <select name="municipality" [(ngModel)]="areaFields.municipality" class="w-full border border-gray-400 rounded-md p-2 outline-none mt-2" id="">
+            <option value="">--Select---</option>
+            <option value="Koronadal City">Koronadal City</option>
+            <option value="Tantangan">Tantangan</option>
+            <option value="Banga">Banga</option>
+        </select>
+        
+        <button class="w-full p-2 rounded-full bg-[#F57600] mt-3 text-white text-lg">
+            Save Changes
+        </button>
+    </form>
+</app-modal>

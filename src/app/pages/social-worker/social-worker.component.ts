@@ -16,6 +16,7 @@ import { RequestForms } from '../../models/request-forms.model';
 export class SocialWorkerComponent implements OnInit {
   headerTitle: string = '';
   modalVisible: boolean = false;
+  controlNumber: string|null = null;
   user: any = null;
   RequestForms: RequestForms = {
     control_number: 0,
@@ -37,35 +38,37 @@ export class SocialWorkerComponent implements OnInit {
     }
   }
 
-  generateControlNumber() {
-    const today = new Date();
-    const yyyy = today.getFullYear().toString();
-    const mm = (today.getMonth() + 1).toString().padStart(2, '0');
-    const dd = today.getDate().toString().padStart(2, '0');
-    const randomDigits = Math.floor(Math.random() * 900 + 100);
-
-    //this.RequestForms.control_number = parseInt(`${yyyy}${mm}${dd}${randomDigits}`);
-  }
-
-
   submitRequest(){
     this.RequestForms.account_id = this.user?.account_id;
-    this.RequestServices.storeRequest(this.RequestForms).subscribe(() => {
-      
+    this.RequestServices.storeRequest(this.RequestForms).subscribe((formRequest: any) => {
+      this.controlNumber = formRequest[1].control_number;
+      this.modalVisible = false;
+
+      // ✅ Automatically print after saving
+      setTimeout(() => {
+        this.generatePrintable();
+      }, 500);
+
     });
+  }
+  generatePrintable() {
+    const printable = document.getElementById('printableForm');
+    if (printable) {
+      printable.removeAttribute('hidden');
+      window.print();
+      printable.setAttribute('hidden', 'true');
+    }
   }
   openModalDOH(){
     localStorage.setItem('Assistance', 'DOH');
     this.headerTitle = 'Form Request ' + localStorage.getItem('Assistance');
     this.modalVisible = true;
-    this.generateControlNumber();
     this.RequestForms.provider_id = 1;
   }
   openModalDSWD(){
     localStorage.setItem('Assistance', 'DSWD');
     this.headerTitle = 'Form Request ' + localStorage.getItem('Assistance');
     this.modalVisible = true;
-    this.generateControlNumber();
     this.RequestForms.provider_id = 2;
   }
   closeModal(){
