@@ -17,6 +17,10 @@ export class RequestFormsService {
     return this.http.get<RequestForms[]>(`${this.apiUrl}/display`)
   }
 
+  displayRecent(): Observable<RequestForms[]>{
+    return this.http.get<RequestForms[]>(`${this.apiUrl}/displayRecent`)
+  }
+
   storeRequest(post : RequestForms) : Observable<RequestForms>{
     return this.http.post<RequestForms>(`${this.apiUrl}/store`, post);
   }

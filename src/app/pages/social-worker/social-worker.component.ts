@@ -18,16 +18,19 @@ export class SocialWorkerComponent implements OnInit {
   modalVisible: boolean = false;
   controlNumber: string|null = null;
   user: any = null;
+  nameWarning: string | null = null;
   RequestForms: RequestForms = {
     control_number: 0,
     patients_name: '',
     representative_name: '',
     address: '' ,
+    request_provided: '' ,
     provider_id: 0 ,
     account_id: 0 ,
     contact_number: null ,
     amount: null ,
   }
+  recentRequest: RequestForms[] =[];
   
   constructor(private RequestServices : RequestFormsService) {}
   
@@ -36,6 +39,21 @@ export class SocialWorkerComponent implements OnInit {
     if (userData) {
       this.user = JSON.parse(userData);
     }
+    this.checkRecent();
+  }
+  checkNameChange(name: string) {
+    if (!name || name.trim() === '') {
+      this.nameWarning = null;
+      return;
+    }
+
+    const hasRecentDuplicate = this.recentRequest.some(req =>
+      req.patients_name!.trim().toLowerCase() === name.trim().toLowerCase()
+    );
+
+    this.nameWarning = hasRecentDuplicate
+      ? "This patient has already made a request within the last 3 months."
+      : null;
   }
 
   submitRequest(){
@@ -43,12 +61,16 @@ export class SocialWorkerComponent implements OnInit {
     this.RequestServices.storeRequest(this.RequestForms).subscribe((formRequest: any) => {
       this.controlNumber = formRequest[1].control_number;
       this.modalVisible = false;
-
-      // ✅ Automatically print after saving
       setTimeout(() => {
+        alert("The Data is added");
         this.generatePrintable();
       }, 500);
 
+    });
+  }
+  checkRecent(){
+    this.RequestServices.displayRecent().subscribe((data) =>{
+      this.recentRequest = data;
     });
   }
   generatePrintable() {
@@ -64,6 +86,7 @@ export class SocialWorkerComponent implements OnInit {
     this.headerTitle = 'Form Request ' + localStorage.getItem('Assistance');
     this.modalVisible = true;
     this.RequestForms.provider_id = 1;
+    
   }
   openModalDSWD(){
     localStorage.setItem('Assistance', 'DSWD');

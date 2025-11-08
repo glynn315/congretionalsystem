@@ -4,8 +4,10 @@ export interface RequestForms {
     patients_name? : string,
     representative_name? : string,
     address? : string,
+    request_provided? : string,
     contact_number? : number | null,
     provider_id? : number,
     account_id? : number,
     amount? : number | null,
+    request_date? : Date | null,
 }

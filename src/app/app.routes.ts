@@ -10,6 +10,7 @@ import { LoginComponent } from './auth/Login/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { MasterlistComponent } from './pages/masterlist/masterlist.component';
+import { PersonelListComponent } from './pages/personel-list/personel-list.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -26,6 +27,7 @@ export const routes: Routes = [
         { path: 'invitations', component: InvitationsComponent },
         { path: 'solicitations', component: SolicitationsComponent },
         { path: 'masterlist', component: MasterlistComponent },
+        { path: 'viewInformation/:area_id', component: PersonelListComponent },
         ]
     },
 ];

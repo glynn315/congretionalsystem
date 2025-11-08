@@ -19,7 +19,10 @@
     <form (ngSubmit)="submitRequest()">
         <div class="mt-2">
             <label for="">Patient's Name</label>
-            <input type="text" name="patients_name" [(ngModel)]="RequestForms.patients_name" id="" class="p-2 border rounded-md w-full">
+            <input type="text" name="patients_name" [(ngModel)]="RequestForms.patients_name" id="" class="p-2 border rounded-md w-full" (ngModelChange)="checkNameChange($event)">
+        </div>
+        <div *ngIf="nameWarning" class="text-red-600 text-sm mt-1">
+        ⚠️ This patient has already made a request within the last 3 months.
         </div>
         <div class="mt-2">
             <label for="">Representative's Name</label>
@@ -33,6 +36,23 @@
             <label for="">Contact Number</label>
             <input type="text" name="contact_number" [(ngModel)]="RequestForms.contact_number" id="" class="p-2 border rounded-md w-full">
         </div>
+        <div class="mt-2">
+            <label for="">Provided by</label>
+            <select name="request_provided" [(ngModel)]="RequestForms.request_provided" id="" class="p-2 border rounded-md w-full">
+                @if (RequestForms.provider_id == 1) {
+                    <option value="Hospitalization">Hospitalization</option>
+                    <option value="Laboratory">Laboratory</option>
+                    <option value="Others">Others</option>
+                }
+                @if (RequestForms.provider_id == 2) {
+                    <option value="Burial Assistance">Burial Assistance</option>
+                    <option value="Medical Assistance">Medical Assistance</option>
+                    <option value="Hospitalization Assistance">Hospitalization Assistance</option>
+                    <option value="Financial Assistance">Financial Assistance</option>
+                }
+                
+            </select>
+        </div>
         <div class="flex flex-row gap-2">
             <div class="mt-2 w-full">
                 <label for="">Amount</label>
@@ -44,13 +64,11 @@
         </button>
     </form>
 </app-modal>
-<button (click)="generatePrintable()">Generate Printable File</button>
-
 <div id="printableForm" class="print-layout" hidden>
     <div class="form-container">
         <div class="form-side">
         <h3>Referral Form - Requestor Copy</h3>
-        <p><b>Control No:</b> {{ RequestForms.control_number }}</p>
+        <p><b>Control No:</b> {{ controlNumber }}</p>
         <p><b>Patient Name:</b> {{ RequestForms.patients_name }}</p>
         <p><b>Representative:</b> {{ RequestForms.representative_name }}</p>
         <p><b>Address:</b> {{ RequestForms.address }}</p>

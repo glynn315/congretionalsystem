@@ -46,10 +46,20 @@ export class FundingsComponent implements OnInit {
     })
   }
 
-  displayPettyBudgets(){
+  displayPettyBudgets() {
     this.FundingsServices.displayPettyFundings().subscribe((data) => {
       this.pettyCashFunding = data;
-    })
+    });
+  }
+
+  addPettyCashFunds() {
+    if (!this.pettyCashFunding.id) return;
+
+    this.budgetField.fundings_id = this.pettyCashFunding.id;
+    this.BudgetServices.storeBudget(this.budgetField).subscribe(() => {
+      this.displayPettyBudgets();
+      this.budgetField.amount = 0;
+    });
   }
 
   getBudgetByFundingId(fundingId: number): number {

@@ -2,9 +2,14 @@
     <div class="w-full flex flex-row justify-between items-center bg-[#F57600] py-2 px-4 text-white rounded-xl">
         <header class="text-lg font-semibold">Master List</header>
         <div class="flex flex-row gap-2">
-            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full">
-                <lucide-icon [img]="plus"></lucide-icon>
-                Master List
+            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openRequestMasterList()">
+                Request Master List
+            </button>
+            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openOfficialsMasterList()">
+                Officials Master List
+            </button>
+            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openMasterList()">
+                Location
             </button>
             <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openAreaModal()">
                 <lucide-icon [img]="mapPlus"></lucide-icon>
@@ -12,27 +17,110 @@
             </button>
         </div>
     </div>
-    <table class="!w-full">
-        <thead>
-            <th>Control No.</th>
-            <th>Name of Requestor</th>
-            <th>Representative Name</th>
-            <th>Address</th>
-            <th>Contact Number</th>
-            <th>Amount</th>
-        </thead>
-        
-            @for (request of RequestForm; track $index) {
+    @if (AssistanceMasterList) {
+        <div class="mt-4">
+            <div class="flex justify-between items-center mb-3">
+            <input
+                type="text"
+                [(ngModel)]="searchTerm"
+                (input)="applyFilterRequests()"
+                placeholder="Search by patient name..."
+                class="border border-gray-400 rounded-md p-2 w-1/3 outline-none"
+                />
+            </div>
+
+            <table class="!w-full border-collapse border border-gray-300">
+            <thead class="bg-gray-200">
                 <tr>
-                    <td>{{request.control_number}}</td>
-                    <td>{{request.patients_name}}</td>
-                    <td>{{request.representative_name}}</td>
-                    <td>{{request.address}}</td>
-                    <td>{{request.contact_number}}</td>
-                    <td>{{request.amount}}</td>
-                </tr>       
-            }
-    </table>
+                <th class="p-2 border">Control No.</th>
+                <th class="p-2 border">Name of Requestor</th>
+                <th class="p-2 border">Representative Name</th>
+                <th class="p-2 border">Address</th>
+                <th class="p-2 border">Contact Number</th>
+                <th class="p-2 border">Amount</th>
+                <th class="p-2 border">Request Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (request of paginatedData; track $index) {
+                <tr class="text-center border">
+                    <td class="p-2 border">{{request.control_number}}</td>
+                    <td class="p-2 border">{{request.patients_name}}</td>
+                    <td class="p-2 border">{{request.representative_name}}</td>
+                    <td class="p-2 border">{{request.address}}</td>
+                    <td class="p-2 border">{{request.contact_number}}</td>
+                    <td class="p-2 border">{{request.amount}}</td>
+                    <td class="p-2 border">{{request.request_date}}</td>
+                </tr>
+                }
+            </tbody>
+            </table>
+            <div class="flex justify-center items-center gap-3 mt-4">
+            <button (click)="previousPageRequests()" [disabled]="currentPage === 1">Previous</button>
+            <span>Page {{currentPage}} of {{totalPages}}</span>
+            <button (click)="nextPageRequests()" [disabled]="currentPage === totalPages">Next</button>
+            </div>
+        </div>
+    }
+    @if (OfficialsMasterList) {
+        <div class="mt-4">
+            <div class="flex justify-between items-center mb-3">
+            <input
+                type="text"
+                [(ngModel)]="searchTermOfficials"
+                (input)="applyFilterOfficials()"
+                placeholder="Search by official name..."
+                class="border border-gray-400 rounded-md p-2 w-1/3 outline-none"
+                />
+            </div>
+
+            <table class="!w-full border-collapse border border-gray-300">
+            <thead class="bg-gray-200">
+                <tr>
+                <th class="p-2 border">ID</th>
+                <th class="p-2 border">Name of Officials</th>
+                <th class="p-2 border">Area</th>
+                <th class="p-2 border">Contact Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (request of paginatedDataOfficials; track $index) {
+                <tr class="text-center border">
+                    <td class="p-2 border">{{request.personel_id}}</td>
+                    <td class="p-2 border">{{request.name}}</td>
+                    <td class="p-2 border">{{request.type}}</td>
+                    <td class="p-2 border">{{request.contact_number}}</td>
+                </tr>
+                }
+            </tbody>
+            </table>
+            <div class="flex justify-center items-center gap-3 mt-4">
+            <button (click)="previousPageOfficials()" [disabled]="currentPageOfficials === 1">Previous</button>
+                <span>Page {{currentPageOfficials}} of {{totalPagesOfficials}}</span>
+            <button (click)="nextPageOfficials()" [disabled]="currentPageOfficials === totalPagesOfficials">Next</button>
+            </div>
+        </div>
+    }
+
+    @if (locationList) {
+        <table class="!w-full">
+            <thead>
+                <th>Control No.</th>
+                <th>Municipality/City</th>
+                <th>Area</th>
+                <th class="w-[10%] !text-center border">Action</th>
+            </thead>
+            
+                @for (area of dropDownArea; track $index) {
+                    <tr>
+                        <td>{{area.area_id}}</td>
+                        <td>{{area.municipality}}</td>
+                        <td>{{area.areaInformation}}</td>
+                        <td><span class="flex flex-row gap-2 items-center justify-center cursor-pointer" (click)="viewInformation(area.area_id!)"><lucide-icon [img]="viewEye"></lucide-icon> View</span></td>
+                    </tr>       
+                }
+        </table>
+    }
 </div>
 <app-modal [Title]="headerTitle" [isVisible]="AreaModal" (closeModal)="closeModal()">
     <header class="mt-2 font-bold text-2xl">Area</header>

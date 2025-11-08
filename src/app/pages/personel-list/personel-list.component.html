@@ -1,0 +1,74 @@
+<div class="py-4 flex flex-col gap-3">
+    <div class="w-full flex flex-row items-center bg-[#F57600] py-3 gap-3 px-4 text-white rounded-xl">
+        <button class=" p-2 px-3 border rounded-full" (click)="backtoMasterList()">
+            <lucide-icon [img]="back"></lucide-icon>
+        </button>
+        <header class="text-lg font-semibold">Officials Masterlist Per Location</header>
+    </div>
+    <div class="w-full flex flex-row justify-between items-center bg-[#F57600] py-2 px-4 text-white rounded-xl">
+        <header class="text-lg font-semibold">Barangay Officials</header>
+        <div class="flex flex-row gap-2">
+            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openModal1()">
+                <lucide-icon [img]="UserPlus"></lucide-icon>
+            </button>
+        </div>
+    </div>
+    @for (personel of BarangayOfficials; track $index) {
+        <div class="w-full border rounded-md p-2 my-2">
+            <p><strong>{{ personel.name }}</strong></p>
+            <p>{{ personel.contact_number }}</p>
+        </div>
+    }
+
+    <div class="w-full flex flex-row justify-between items-center bg-[#F57600] py-2 px-4 text-white rounded-xl">
+        <header class="text-lg font-semibold">SK Officials</header>
+        <div class="flex flex-row gap-2">
+            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openModal2()">
+                <lucide-icon [img]="UserPlus"></lucide-icon>
+            </button>
+        </div>
+    </div>
+    @for (personel of BarangaySK; track $index) {
+        <div class="w-full border rounded-md p-2 my-2">
+            <p><strong>{{ personel.name }}</strong></p>
+            <p>{{ personel.contact_number }}</p>
+        </div>
+    }
+    <div class="w-full flex flex-row justify-between items-center bg-[#F57600] py-2 px-4 text-white rounded-xl">
+        <header class="text-lg font-semibold">Additional Leaders</header>
+        <div class="flex flex-row gap-2">
+            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openModal3()">
+                <lucide-icon [img]="UserPlus"></lucide-icon>
+            </button>
+        </div>
+    </div>
+    @for (personel of BarangayLeaders; track $index) {
+        <div class="w-full border rounded-md p-2 my-2">
+            <p><strong>{{ personel.name }}</strong></p>
+            <p>{{ personel.contact_number }}</p>
+        </div>
+    }
+    <div class="w-full flex flex-row justify-between items-center bg-[#F57600] py-2 px-4 text-white rounded-xl">
+        <header class="text-lg font-semibold">Purok Leaders</header>
+        <div class="flex flex-row gap-2">
+            <button class="flex flex-row gap-3 items-center p-3 px-5 border rounded-full" (click)="openModal4()">
+                <lucide-icon [img]="UserPlus"></lucide-icon>
+            </button>
+        </div>
+    </div>
+    @for (personel of BarangayPurok; track $index) {
+        <div class="w-full border rounded-md p-2 my-2">
+            <p><strong>{{ personel.name }}</strong></p>
+            <p>{{ personel.contact_number }}</p>
+        </div>
+    }
+</div>
+<app-modal [Title]="masterListHeader" [isVisible]="masterlistModal" (closeModal)="closeModal()">
+    <header class="mt-2 font-bold text-2xl">{{areaPosition}}</header>
+    <form (ngSubmit)="storePersonel()">
+        <input type="text" name="name" [(ngModel)]="MasterListFields.name" id="" placeholder="Name" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="text" name="contact_number" [(ngModel)]="MasterListFields.contact_number" id="" placeholder="Contact Number" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="submit" value="Save Changes" class="w-full rounded-md bg-blue-500 text-white p-2 mt-2">
+    </form>
+
+</app-modal>
