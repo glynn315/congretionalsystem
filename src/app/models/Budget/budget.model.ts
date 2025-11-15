@@ -3,4 +3,5 @@ export interface Budget {
     fundings_id: number,
     amount: number,
     created_by: number,
+    created_at? : Date;
 }

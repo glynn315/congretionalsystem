@@ -16,6 +16,9 @@ export class BudgetsService {
   displayBudget(): Observable<Budget[]>{
     return this.http.get<Budget[]>(`${this.apiUrl}/displayBudgets`)
   }
+  displayBudgetbyID(id: number): Observable<Budget[]>{
+    return this.http.get<Budget[]>(`${this.apiUrl}/displayBudgets/${id}`)
+  }
 
   storeBudget(post : Budget) : Observable<Budget>{
     return this.http.post<Budget>(`${this.apiUrl}/storeBudgets`, post);

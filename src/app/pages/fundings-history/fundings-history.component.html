@@ -1,0 +1,23 @@
+<div>
+    <table class="!w-full mt-4">
+        <thead>
+            <th>#</th>
+            <th>Funding Information</th>
+            <th>Amount</th>
+            <th>Created BY</th>
+            <th class="w-[15%] !text-center">Date Updated</th>
+        </thead>
+        
+            @for (area of fundingsList; track $index) {
+                <tr>
+                    <td>{{$index + 1}}</td>
+                    <td *ngIf="area.fundings_id == 1">DOH</td>
+                    <td *ngIf="area.fundings_id == 2">DSWD</td>
+                    <td *ngIf="area.fundings_id == 3">PETTY CASH</td>
+                    <td>{{area.amount}}</td>
+                    <td>{{area.created_by}}</td>
+                    <td class="text-center">{{area.created_at | date}}</td>
+                </tr>       
+            }
+    </table>
+</div>

@@ -36,7 +36,10 @@ export class InvitationsComponent implements OnInit {
     name_inviter: '',
     purpose: '',
     reveivedBy: 123,
-    dateInvitation: ''
+    dateInvitation: '',
+    event_address: '',
+    remarks: '',
+    contact_number: null
   };
 
   InvitationData: Invitation[] = [];

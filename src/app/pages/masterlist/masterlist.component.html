@@ -29,36 +29,36 @@
                 />
             </div>
 
-            <table class="!w-full border-collapse border border-gray-300">
-            <thead class="bg-gray-200">
+            <table>
+            <thead>
                 <tr>
-                <th class="p-2 border">Control No.</th>
-                <th class="p-2 border">Name of Requestor</th>
-                <th class="p-2 border">Representative Name</th>
-                <th class="p-2 border">Address</th>
-                <th class="p-2 border">Contact Number</th>
-                <th class="p-2 border">Amount</th>
-                <th class="p-2 border">Request Date</th>
+                    <th>Control No.</th>
+                    <th>Name of Requestor</th>
+                    <th>Representative Name</th>
+                    <th>Address</th>
+                    <th>Contact Number</th>
+                    <th>Amount</th>
+                    <th>Request Date</th>
                 </tr>
             </thead>
             <tbody>
                 @for (request of paginatedData; track $index) {
-                <tr class="text-center border">
-                    <td class="p-2 border">{{request.control_number}}</td>
-                    <td class="p-2 border">{{request.patients_name}}</td>
-                    <td class="p-2 border">{{request.representative_name}}</td>
-                    <td class="p-2 border">{{request.address}}</td>
-                    <td class="p-2 border">{{request.contact_number}}</td>
-                    <td class="p-2 border">{{request.amount}}</td>
-                    <td class="p-2 border">{{request.request_date}}</td>
+                <tr>
+                    <td>{{request.control_number}}</td>
+                    <td>{{request.patients_name}}</td>
+                    <td>{{request.representative_name}}</td>
+                    <td>{{request.address}}</td>
+                    <td>{{request.contact_number}}</td>
+                    <td>{{request.amount}}</td>
+                    <td>{{request.request_date}}</td>
                 </tr>
                 }
             </tbody>
             </table>
-            <div class="flex justify-center items-center gap-3 mt-4">
-            <button (click)="previousPageRequests()" [disabled]="currentPage === 1">Previous</button>
-            <span>Page {{currentPage}} of {{totalPages}}</span>
-            <button (click)="nextPageRequests()" [disabled]="currentPage === totalPages">Next</button>
+            <div class="flex justify-center items-center gap-3 mt-4 pagination">
+                <button (click)="previousPageRequests()" [disabled]="currentPage === 1">Previous</button>
+                    <span>Page {{currentPage}} of {{totalPages}}</span>
+                <button (click)="nextPageRequests()" [disabled]="currentPage === totalPages">Next</button>
             </div>
         </div>
     }
@@ -74,41 +74,41 @@
                 />
             </div>
 
-            <table class="!w-full border-collapse border border-gray-300">
-            <thead class="bg-gray-200">
+            <table>
+            <thead>
                 <tr>
-                <th class="p-2 border">ID</th>
-                <th class="p-2 border">Name of Officials</th>
-                <th class="p-2 border">Area</th>
-                <th class="p-2 border">Contact Number</th>
+                    <th>ID</th>
+                    <th>Name of Officials</th>
+                    <th>Area</th>
+                    <th>Contact Number</th>
                 </tr>
             </thead>
             <tbody>
                 @for (request of paginatedDataOfficials; track $index) {
-                <tr class="text-center border">
-                    <td class="p-2 border">{{request.personel_id}}</td>
-                    <td class="p-2 border">{{request.name}}</td>
-                    <td class="p-2 border">{{request.type}}</td>
-                    <td class="p-2 border">{{request.contact_number}}</td>
+                <tr>
+                    <td>{{request.personel_id}}</td>
+                    <td>{{request.name}}</td>
+                    <td>{{request.type}}</td>
+                    <td>{{request.contact_number}}</td>
                 </tr>
                 }
             </tbody>
             </table>
-            <div class="flex justify-center items-center gap-3 mt-4">
-            <button (click)="previousPageOfficials()" [disabled]="currentPageOfficials === 1">Previous</button>
-                <span>Page {{currentPageOfficials}} of {{totalPagesOfficials}}</span>
-            <button (click)="nextPageOfficials()" [disabled]="currentPageOfficials === totalPagesOfficials">Next</button>
+            <div class="flex justify-center items-center gap-3 mt-4 pagination">
+                <button (click)="previousPageOfficials()" [disabled]="currentPageOfficials === 1">Previous</button>
+                    <span>Page {{currentPageOfficials}} of {{totalPagesOfficials}}</span>
+                <button (click)="nextPageOfficials()" [disabled]="currentPageOfficials === totalPagesOfficials">Next</button>
             </div>
         </div>
     }
 
     @if (locationList) {
-        <table class="!w-full">
+        <table class="!w-full mt-4">
             <thead>
                 <th>Control No.</th>
                 <th>Municipality/City</th>
                 <th>Area</th>
-                <th class="w-[10%] !text-center border">Action</th>
+                <th class="w-[10%] !text-center">Action</th>
             </thead>
             
                 @for (area of dropDownArea; track $index) {

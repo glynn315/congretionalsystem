@@ -25,7 +25,9 @@ export class SolicitationsComponent implements OnInit {
   SolicitationFields : Solicitation = {
     name_solicitor: '',
     purpose: '',
-    reveivedBy: 123
+    reveivedBy: 123,
+    particular: '',
+    amount: null
   }
   SolicitationData: Solicitation[] = [];
   calendarOptions: CalendarOptions = {

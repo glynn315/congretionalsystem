@@ -11,15 +11,23 @@
     <header class="text-xl mt-2 font-bold">Solicitation Information</header>
     <form (ngSubmit)="SubmitSolicitation()">
         <div class="flex flex-row gap-3">
-            <div class="mt-2 w-4/6">
+            <div class="mt-2 w-full">
                 <label for="">Name of Solicitor</label>
                 <input type="text" name="name_solicitor" [(ngModel)]="SolicitationFields.name_solicitor" id="" class="w-full p-2 border rounded-md">
+            </div>
+            <div class="mt-2 w-3/6">
+                <label for="">Particulars</label>
+                <input type="text" name="particular" [(ngModel)]="SolicitationFields.particular" id="" class="w-full p-2 border rounded-md">
             </div>
         </div>
         <div class="mt-1">
             <div>Purpose of Solicitation</div>
             <textarea name="purpose" id="" [(ngModel)]="SolicitationFields.purpose" class="p-2 border rounded-md w-full">
             </textarea>
+        </div>
+        <div class="mt-1">
+            <div>Amount</div>
+            <input type="text" name="amount" [(ngModel)]="SolicitationFields.amount" id="" class="w-full p-2 border rounded-md">
         </div>
         <button class="w-full p-2 rounded-full bg-[#F57600] text-white mt-3">
             Save Changes

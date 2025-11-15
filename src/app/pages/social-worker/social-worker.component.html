@@ -64,34 +64,3 @@
         </button>
     </form>
 </app-modal>
-<div id="printableForm" class="print-layout" hidden>
-    <div class="form-container">
-        <div class="form-side">
-        <h3>Referral Form - Requestor Copy</h3>
-        <p><b>Control No:</b> {{ controlNumber }}</p>
-        <p><b>Patient Name:</b> {{ RequestForms.patients_name }}</p>
-        <p><b>Representative:</b> {{ RequestForms.representative_name }}</p>
-        <p><b>Address:</b> {{ RequestForms.address }}</p>
-        <p><b>Contact:</b> {{ RequestForms.contact_number }}</p>
-        <p><b>Amount:</b> {{ RequestForms.amount }}</p>
-        <p><b>Provider:</b> 
-            {{ RequestForms.provider_id === 1 ? 'DOH' : RequestForms.provider_id === 2 ? 'DSWD' : '' }}
-        </p>
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="form-side">
-        <h3>Referral Form - Social Worker Copy</h3>
-        <p><b>Control No:</b> {{ controlNumber }}</p>
-        <p><b>Patient Name:</b> {{ RequestForms.patients_name }}</p>
-        <p><b>Representative:</b> {{ RequestForms.representative_name }}</p>
-        <p><b>Address:</b> {{ RequestForms.address }}</p>
-        <p><b>Contact:</b> {{ RequestForms.contact_number }}</p>
-        <p><b>Amount:</b> {{ RequestForms.amount }}</p>
-        <p><b>Provider:</b> 
-            {{ RequestForms.provider_id === 1 ? 'DOH' : RequestForms.provider_id === 2 ? 'DSWD' : '' }}
-        </p>
-        </div>
-    </div>
-</div>

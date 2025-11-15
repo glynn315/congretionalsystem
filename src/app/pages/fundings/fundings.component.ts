@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { FundingsService } from '../../services/Fundings/fundings.service';
 import { BudgetsService } from '../../services/Budget/budgets.service';
 import { Budget } from '../../models/Budget/budget.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fundings',
@@ -19,7 +20,9 @@ import { Budget } from '../../models/Budget/budget.model';
 export class FundingsComponent implements OnInit {
   readonly Funding = BanknoteArrowUp;
   isVisible: boolean = false;
+  isVisible1: boolean = false;
   TitleHeader: string = 'Update Fundings'
+  TitleHeaderPettyCash: string = 'Petty Cash Funding'
   FundingID: number = 0;
   fundingsInformation : Fundings[] = [];
   pettyCashFunding : Fundings = {
@@ -32,7 +35,7 @@ export class FundingsComponent implements OnInit {
   }
   TotalBudget: any;
 
-  constructor(private FundingsServices : FundingsService , private BudgetServices : BudgetsService){}
+  constructor(private FundingsServices : FundingsService , private BudgetServices : BudgetsService, private router: Router){}
 
   ngOnInit(): void {
     this.displayFunding();
@@ -59,6 +62,8 @@ export class FundingsComponent implements OnInit {
     this.BudgetServices.storeBudget(this.budgetField).subscribe(() => {
       this.displayPettyBudgets();
       this.budgetField.amount = 0;
+      this.displayBudgets();
+      this.isVisible1 = false;
     });
   }
 
@@ -77,14 +82,30 @@ export class FundingsComponent implements OnInit {
     this.isVisible = true;
     this.FundingID = id;
   }
+  openModalPetty(id : number){
+    this.isVisible1 = true;
+    this.FundingID = id;
+  }
 
   addFundings(){
     this.budgetField.fundings_id = this.FundingID;
     this.BudgetServices.storeBudget(this.budgetField).subscribe(() => {
-
+      this.displayBudgets();
+      this.isVisible = false;
+      this.budgetField.amount = 0;
     });
+  }
+  viewFundings(id: number){
+    if (id) {
+      this.FundingID = id;
+      this.router.navigate([`/viewFundings/${this.FundingID}`]);
+    }
+    
   }
   closeModal(){
     this.isVisible = false;
+  }
+  closePettyCashModal(){
+    this.isVisible1 = false;
   }
 }
