@@ -333,6 +333,12 @@ export class SocialWorkerComponent implements OnInit {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
               }
+              .dswd-container{
+                display:flex;
+                flex-direction:column;
+                justify-content:space-between;
+                gap:4;
+              }
 
               .container { width: 100%; }
 
@@ -391,46 +397,88 @@ export class SocialWorkerComponent implements OnInit {
           </head>
 
           <body onload="window.print(); window.close();">
-            <div class="container">
+            <div class="dswd-container">
+              <div class="container">
+                <div class="header">
+                  <img src="/header2.jpg">
+                </div>
+                <div class="control-box">
+                  CONTROL NO.: ${this.controlNumber}
+                </div>
 
-              <div class="header">
-                <img src="/header2.jpg">
-              </div>
-              <div class="control-box">
-                CONTROL NO.: ${this.controlNumber}
-              </div>
 
-
-              <div style="display:flex; flex-direction:row; gap:10px; align-items:start;">
-                <table style="width:75%;">
-                  <tr><td class="label" style="width:40%;">Patient's Name:</td><td class="field">${this.RequestForms.patients_name}</td></tr>
-                  <tr><td class="label">Representative's Name:</td><td class="field">${this.RequestForms.representative_name}</td></tr>
+                <div style="display:flex; flex-direction:row; gap:10px; align-items:start;">
+                  <table style="width:75%;">
+                    <tr><td class="label" style="width:40%;">Patient's Name:</td><td class="field">${this.RequestForms.patients_name}</td></tr>
+                    <tr><td class="label">Representative's Name:</td><td class="field">${this.RequestForms.representative_name}</td></tr>
+                  </table>
+                  <table style="width:25%;">
+                    <tr><td>Contact Number:</td></tr>
+                    <tr style="border: 1px solid black;"><td>${this.RequestForms.contact_number}</td></tr>
+                  </table>
+                </div>
+                <table>
+                  <tr><td style="width:30% !important;">ADDRESS:</td><td class="field">${this.RequestForms.address}</td></tr>
                 </table>
-                <table style="width:25%;">
-                  <tr><td>Contact Number:</td></tr>
-                  <tr style="border: 1px solid black;"><td>${this.RequestForms.contact_number}</td></tr>
+
+                
+
+                <div class="section-title">THE ASSISTANCE PROVIDED</div>
+
+                <table>
+                  <tr><td style="width:30% !important;">Purpose:</td><td class="field">${this.RequestForms.request_provided ?? ''}</td></tr>
+                  <tr><td style="width:30% !important;">Amount (figures):</td><td class="field">${this.RequestForms.amount ?? ''}</td></tr>
+                  <tr><td style="width:30% !important;">Purpose (Words)</td><td class="field">${amountInWords}</td></tr>
                 </table>
-              </div>
-              <table>
-                <tr><td style="width:30% !important;">ADDRESS:</td><td class="field">${this.RequestForms.address}</td></tr>
-              </table>
 
-              
+                <div class="signature">
+                  <div style="margin-top:20px; margin:auto;"></div>
+                  ATTY. FERDINAND L. HERNANDEZ <br>
+                  2ND DISTRICT, CONGRESSMAN
+                </div>
 
-              <div class="section-title">THE ASSISTANCE PROVIDED</div>
-
-              <table>
-                <tr><td style="width:30% !important;">Purpose:</td><td class="field">${this.RequestForms.request_provided ?? ''}</td></tr>
-                <tr><td style="width:30% !important;">Amount (figures):</td><td class="field">${this.RequestForms.amount ?? ''}</td></tr>
-                <tr><td style="width:30% !important;">Purpose (Words)</td><td class="field">${amountInWords}</td></tr>
-              </table>
-
-              <div class="signature">
-                <div style="margin-top:40px; border-top:1px solid black; width:250px; margin:auto;"></div>
-                ATTY. FERDINAND L. HERNANDEZ <br>
-                2ND DISTRICT, CONGRESSMAN
               </div>
 
+              <div class="container" style="margin-top:30px;">
+                <div class="header">
+                  <img src="/header2.jpg">
+                </div>
+                <div class="control-box">
+                  CONTROL NO.: ${this.controlNumber}
+                </div>
+
+
+                <div style="display:flex; flex-direction:row; gap:10px; align-items:start;">
+                  <table style="width:75%;">
+                    <tr><td class="label" style="width:40%;">Patient's Name:</td><td class="field">${this.RequestForms.patients_name}</td></tr>
+                    <tr><td class="label">Representative's Name:</td><td class="field">${this.RequestForms.representative_name}</td></tr>
+                  </table>
+                  <table style="width:25%;">
+                    <tr><td>Contact Number:</td></tr>
+                    <tr style="border: 1px solid black;"><td>${this.RequestForms.contact_number}</td></tr>
+                  </table>
+                </div>
+                <table>
+                  <tr><td style="width:30% !important;">ADDRESS:</td><td class="field">${this.RequestForms.address}</td></tr>
+                </table>
+
+                
+
+                <div class="section-title">THE ASSISTANCE PROVIDED</div>
+
+                <table>
+                  <tr><td style="width:30% !important;">Purpose:</td><td class="field">${this.RequestForms.request_provided ?? ''}</td></tr>
+                  <tr><td style="width:30% !important;">Amount (figures):</td><td class="field">${this.RequestForms.amount ?? ''}</td></tr>
+                  <tr><td style="width:30% !important;">Purpose (Words)</td><td class="field">${amountInWords}</td></tr>
+                </table>
+
+                <div class="signature">
+                  <div style="margin-top:20px; margin:auto;"></div>
+                  ATTY. FERDINAND L. HERNANDEZ <br>
+                  2ND DISTRICT, CONGRESSMAN
+                </div>
+
+              </div>
             </div>
           </body>
         </html>

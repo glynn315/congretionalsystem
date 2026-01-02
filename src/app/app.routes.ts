@@ -12,6 +12,8 @@ import { LoginGuard } from './guards/login.guard';
 import { MasterlistComponent } from './pages/masterlist/masterlist.component';
 import { PersonelListComponent } from './pages/personel-list/personel-list.component';
 import { FundingsHistoryComponent } from './pages/fundings-history/fundings-history.component';
+import { ViewHistoryComponent } from './pages/history/view-history/view-history.component';
+import { PettycashComponent } from './pages/pettycash/pettycash.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -28,6 +30,8 @@ export const routes: Routes = [
         { path: 'invitations', component: InvitationsComponent },
         { path: 'solicitations', component: SolicitationsComponent },
         { path: 'masterlist', component: MasterlistComponent },
+        { path: 'history', component: ViewHistoryComponent },
+        { path: 'pettycash', component: PettycashComponent },
         { path: 'viewInformation/:area_id', component: PersonelListComponent },
         { path: 'viewFundings/:FundingID', component: FundingsHistoryComponent },
         ]

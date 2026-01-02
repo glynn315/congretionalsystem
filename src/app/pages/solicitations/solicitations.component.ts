@@ -58,6 +58,7 @@ export class SolicitationsComponent implements OnInit {
     this.SolicitationService.storeSolicitation(this.SolicitationFields).subscribe(() => {
       this.closeModal();
       this.displayList();
+      
     });
   }
   loadCalendarEvents() {

@@ -1,0 +1,32 @@
+<div class="py-4">
+    <div class="w-full flex flex-row justify-between items-center bg-[#F57600] p-3 text-white rounded-xl">
+        <header class="text-lg font-semibold">Petty Cash</header>
+        <div class="flex flex-row items-center gap-2">
+            <button class="p-1 px-3 bg-cyan-200 shadow text-black rounded-full flex flex-row gap-2" (click)="openModal()"> <lucide-icon [img]="PlusIcon"></lucide-icon> Petty Cash</button>
+        </div>
+    </div>
+</div>
+
+<app-modal [Title]="TitleHeader" [isVisible]="isVisible" (closeModal)="closeModal()">
+    <header class="text-xl mt-2 font-bold">Petty Cash Information</header>
+    <form (ngSubmit)="submitPettyCash()">
+        <div class="flex flex-row gap-3">
+            <div class="mt-2 w-full">
+                <label for="">Name of Solicitor</label>
+                <input type="text" name="requestName" [(ngModel)]="PettyCashField.requestName" id="" class="w-full p-2 border rounded-md">
+            </div>
+        </div>
+        <div class="mt-1">
+            <div>Purpose of Solicitation</div>
+            <textarea name="pettycashDescription" id="" [(ngModel)]="PettyCashField.pettycashDescription" class="p-2 border rounded-md w-full">
+            </textarea>
+        </div>
+        <div class="mt-1">
+            <div>Amount</div>
+            <input type="text" name="pettycashAmount" [(ngModel)]="PettyCashField.pettycashAmount" id="" class="w-full p-2 border rounded-md">
+        </div>
+        <button class="w-full p-2 rounded-full bg-[#F57600] text-white mt-3">
+            Save Changes
+        </button>
+    </form>
+</app-modal>
