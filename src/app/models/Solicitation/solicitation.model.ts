@@ -3,6 +3,7 @@ export interface Solicitation {
     purpose: string,
     particular: string,
     amount: number | null,
+    date_event?: Date | null,
     reveivedBy: number,
     dateCreated?: Date,
 }

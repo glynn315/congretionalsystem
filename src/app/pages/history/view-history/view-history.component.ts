@@ -27,6 +27,10 @@ export class ViewHistoryComponent implements OnInit {
   itemsPerPage: number = 10;
   totalPages: number = 1;
   searchTerm: string = '';
+  isModalOpen = false;
+  selectedRequest: any = {};
+  isCancelChecked = false;
+  cancelReason = '';
   applyFilterRequests() {
     const term = this.searchTerm.toLowerCase().trim();
     this.filteredData = this.RequestForm.filter(req =>
@@ -43,7 +47,7 @@ export class ViewHistoryComponent implements OnInit {
     this.paginatedData = this.filteredData.slice(startIndex, endIndex);
   }
   displayForm() {
-    this.RequestServices.displayForms().subscribe((data) => {
+    this.RequestServices.displayRecent().subscribe((data) => {
       this.RequestForm = data;
       this.filteredData = [...this.RequestForm];
       this.updatePaginationRequests();
@@ -61,5 +65,36 @@ export class ViewHistoryComponent implements OnInit {
       this.currentPage--;
       this.updatePaginationRequests();
     }
+  }
+  openModifyModal(request: any) {
+    this.selectedRequest = { ...request };
+    this.isModalOpen = true;
+  }
+
+  closeModal() {
+    this.isModalOpen = false;
+    this.selectedRequest = {};
+  }
+  updateRequest() {
+    if (this.isCancelChecked) {
+      this.selectedRequest.is_active = false;
+      this.selectedRequest.is_cancel = true;
+      this.selectedRequest.cancel_information = this.cancelReason;
+    }
+
+    this.RequestServices.updateRequest(this.selectedRequest.request_form_id, this.selectedRequest).subscribe({
+      next: () => {
+        this.closeModal();
+        //this.loadRequests();
+        this.resetCancelState();
+      },
+      error: (err: any) => {
+        console.error(err);
+      }
+    });
+  }
+  resetCancelState() {
+    this.isCancelChecked = false;
+    this.cancelReason = '';
   }
 }

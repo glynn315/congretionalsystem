@@ -10,4 +10,7 @@ export interface RequestForms {
     account_id? : number,
     amount? : number | null,
     request_date? : Date | null,
+    hospital_name? : string,
+    is_cancel? : boolean,
+    cancel_information? : string,
 }

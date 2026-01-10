@@ -23,12 +23,15 @@ export class SocialWorkerComponent implements OnInit {
   nameWarning: string | null = null;
   recentRequest: RequestForms[] = [];
   today: string = '';
+  nameWarnings = false;
+
 
   RequestForms: RequestForms = {
     control_number: 0,
     patients_name: '',
     representative_name: '',
     address: '',
+    hospital_name: '',
     request_provided: '',
     provider_id: 0,
     account_id: 0,
@@ -49,17 +52,39 @@ export class SocialWorkerComponent implements OnInit {
   checkNameChange(name: string) {
     if (!name || !name.trim()) {
       this.nameWarning = null;
+      this.nameWarnings = false;
       return;
     }
 
-    const hasRecentDuplicate = this.recentRequest.some(req =>
-      req.patients_name?.trim().toLowerCase() === name.trim().toLowerCase()
+    if (!this.RequestForms.provider_id) {
+      // Provider not selected yet
+      this.nameWarning = null;
+      this.nameWarnings = false;
+      return;
+    }
+
+    const providerId = this.RequestForms.provider_id;
+
+    const matches = this.recentRequest.filter(req =>
+      req.patients_name?.trim().toLowerCase() === name.trim().toLowerCase() &&
+      req.provider_id === providerId
     );
 
-    this.nameWarning = hasRecentDuplicate
-      ? "This patient has already made a request within the last 3 months."
-      : null;
+    if (matches.length > 0) {
+      this.nameWarnings = true;
+      this.nameWarning =
+        providerId === 1
+          ? 'This patient has already made a DOH request within the last 3 months.'
+          : 'This patient has already made a DSWD request within the last 3 months.';
+
+      this.recentRequest = matches;
+    } else {
+      this.nameWarnings = false;
+      this.nameWarning = null;
+    }
   }
+
+
 
   submitRequest() {
     this.RequestForms.account_id = this.user?.account_id;

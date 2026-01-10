@@ -15,7 +15,7 @@
     </div>
     @for (personel of BarangayOfficials; track $index) {
         <div class="w-full border rounded-md p-2 my-2">
-            <p><strong>{{ personel.name }}</strong></p>
+            <p><strong>{{ personel.first_name}} {{ personel.last_name}}</strong></p>
             <p>{{ personel.contact_number }}</p>
         </div>
     }
@@ -30,7 +30,7 @@
     </div>
     @for (personel of BarangaySK; track $index) {
         <div class="w-full border rounded-md p-2 my-2">
-            <p><strong>{{ personel.name }}</strong></p>
+            <p><strong>{{ personel.first_name}} {{ personel.last_name}}</strong></p>
             <p>{{ personel.contact_number }}</p>
         </div>
     }
@@ -44,7 +44,7 @@
     </div>
     @for (personel of BarangayLeaders; track $index) {
         <div class="w-full border rounded-md p-2 my-2">
-            <p><strong>{{ personel.name }}</strong></p>
+            <p><strong>{{ personel.first_name}} {{ personel.last_name}}</strong></p>
             <p>{{ personel.contact_number }}</p>
         </div>
     }
@@ -58,7 +58,7 @@
     </div>
     @for (personel of BarangayPurok; track $index) {
         <div class="w-full border rounded-md p-2 my-2">
-            <p><strong>{{ personel.name }}</strong></p>
+            <p><strong>{{ personel.first_name}} {{ personel.last_name}}</strong></p>
             <p>{{ personel.contact_number }}</p>
         </div>
     }
@@ -66,7 +66,15 @@
 <app-modal [Title]="masterListHeader" [isVisible]="masterlistModal" (closeModal)="closeModal()">
     <header class="mt-2 font-bold text-2xl">{{areaPosition}}</header>
     <form (ngSubmit)="storePersonel()">
-        <input type="text" name="name" [(ngModel)]="MasterListFields.name" id="" placeholder="Name" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="text" name="first_name" [(ngModel)]="MasterListFields.first_name" id="" placeholder="First Name" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="text" name="middle_name" [(ngModel)]="MasterListFields.middle_name" id="" placeholder="Middle Name" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="text" name="last_name" [(ngModel)]="MasterListFields.last_name" id="" placeholder="Last Name" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="text" name="extension" [(ngModel)]="MasterListFields.extension" id="" placeholder="Extension" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="date" name="birthday" [(ngModel)]="MasterListFields.birthday" id="" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="text" name="sex" [(ngModel)]="MasterListFields.sex" id="" placeholder="Sex" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="text" name="civil_status" [(ngModel)]="MasterListFields.civil_status" id="" placeholder="Civil Status" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="text" name="purok" [(ngModel)]="MasterListFields.purok" id="" placeholder="Purok" class="w-full p-2 rounded-md outline-none border mt-2">
+        <input type="text" name="municipality_city" [(ngModel)]="MasterListFields.municipality_city" id="" placeholder="Municipality" class="w-full p-2 rounded-md outline-none border mt-2">
         <input type="text" name="contact_number" [(ngModel)]="MasterListFields.contact_number" id="" placeholder="Contact Number" class="w-full p-2 rounded-md outline-none border mt-2">
         <input type="submit" value="Save Changes" class="w-full rounded-md bg-blue-500 text-white p-2 mt-2">
     </form>

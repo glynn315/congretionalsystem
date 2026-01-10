@@ -24,4 +24,7 @@ export class RequestFormsService {
   storeRequest(post : RequestForms) : Observable<RequestForms>{
     return this.http.post<RequestForms>(`${this.apiUrl}/store`, post);
   }
+  updateRequest(requestFormId: string, payload: RequestForms): Observable<RequestForms> {
+    return this.http.put<RequestForms>(`${this.apiUrl}/updateForm/${requestFormId}`,payload);
+  }
 }

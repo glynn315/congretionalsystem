@@ -25,7 +25,15 @@ export class PersonelListComponent implements OnInit {
   areaID: number | null = null;
 
   MasterListFields: Masterlist = {
-    name: '',
+    first_name: '',
+    last_name: '',
+    middle_name: '',
+    extension: '',
+    birthday: '',
+    sex: '',
+    civil_status: '',
+    purok: '',
+    municipality_city: '',
     contact_number: null,
     affiliate: '',
     type: '',

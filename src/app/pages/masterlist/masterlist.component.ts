@@ -112,7 +112,7 @@ export class MasterlistComponent implements OnInit {
   applyFilterOfficials() {
     const term = this.searchTermOfficials.toLowerCase().trim();
     this.filteredDataOfficials = this.OfficialsList.filter(o =>
-      o.name?.toLowerCase().includes(term)
+      o.first_name?.toLowerCase().includes(term)
     );
     this.currentPageOfficials = 1;
     this.updatePaginationOfficials();
