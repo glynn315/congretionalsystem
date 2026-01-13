@@ -57,7 +57,6 @@ export class SocialWorkerComponent implements OnInit {
     }
 
     if (!this.RequestForms.provider_id) {
-      // Provider not selected yet
       this.nameWarning = null;
       this.nameWarnings = false;
       return;
